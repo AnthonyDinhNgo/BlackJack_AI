@@ -10,4 +10,9 @@ public class ArbitraryPlayer extends GenericPlayer{
     public boolean getAction() {
         return Math.random() > 0.5;
     }
+
+    @Override
+    public int getBet() {
+        return (int) ((Math.random() * (super.getBalance()))) + 1;
+    }
 }
