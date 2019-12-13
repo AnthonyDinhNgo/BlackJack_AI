@@ -61,6 +61,7 @@ public class BlackJackGame {
             int bet = p.getBet();
             p.changeBalance(0-bet);
             betMap.put(p, bet);
+            p.incrementRoundsPlayed();
             System.out.println(p.getName() + " has bet $" + bet);
         }
         return betMap;
@@ -114,6 +115,7 @@ public class BlackJackGame {
             System.out.println("Dealer busted. Everyone Wins");
             for (GenericPlayer p : playerRoster) {
                 p.changeBalance(2 * betMap.get(p));
+                p.incrementRoundsWon();
                 System.out.println(p.getName() + " has $" + p.getBalance() + " left");
             }
         } else {
@@ -128,6 +130,7 @@ public class BlackJackGame {
                     System.out.println(pName + " has " + playerValue);
                     if (playerValue > dealerValue) {
                         p.changeBalance(2 * betMap.get(p));
+                        p.incrementRoundsWon();
                         System.out.println(pName + " won $" + betMap.get(p));
                     } else if (playerValue == dealerValue) {
                         p.changeBalance(betMap.get(p));
@@ -149,6 +152,8 @@ public class BlackJackGame {
         for (GenericPlayer p : eliminationList) {
             playerRoster.remove(p);
             System.out.println(p.getName() + " has no more money and has left the game");
+            int winPercent = (int) (p.getWinRate() * 100);
+            System.out.println(p.getName() + " won " + p.getRoundsWon() + " rounds (" + winPercent + "%)");
         }
     }
 
