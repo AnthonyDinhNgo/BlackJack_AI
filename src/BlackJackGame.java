@@ -86,6 +86,8 @@ public class BlackJackGame {
         for (GenericPlayer p : playerRoster) {
             while (p.canHit() && p.getAction()){
                 p.giveCard(deck.getCard());
+                System.out.println(p.getName() + " has " + p.getHand().toString());
+                System.out.println(p.getName() + " has possible totals of " + p.getHand().value());
             }
         }
 

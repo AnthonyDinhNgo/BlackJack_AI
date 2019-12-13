@@ -18,6 +18,7 @@ public class HumanPlayer extends GenericPlayer {
     @Override
     public boolean getAction() {
         Scanner console = new Scanner(System.in);
+        System.out.println("Would you like to HIT or STAY?");
         String input = console.nextLine();
         while (!(input.equalsIgnoreCase("hit") || input.equalsIgnoreCase("stay"))) {
             System.out.println("Error: Invalid Input; enter HIT or STAY");
@@ -30,11 +31,11 @@ public class HumanPlayer extends GenericPlayer {
     public int getBet() {
         Scanner console = new Scanner(System.in);
         System.out.println("How much would you like to bet?\nYou have $"+ getBalance());
-        int input = console.nextInt();
-        while (input < 0 || input > getBalance()) {
-            System.out.println("Bet must be between $0 and $"+ getBalance());
-            input = console.nextInt();
+        String input = console.nextLine();
+        while (!input.matches("[0-9]+") || Integer.parseInt(input) < 0 || Integer.parseInt(input) > getBalance()) {
+            System.out.println("Bet must be between an integer 0 and "+ getBalance());
+            input = console.nextLine();
         }
-        return input;
+        return Integer.parseInt(input);
     }
 }

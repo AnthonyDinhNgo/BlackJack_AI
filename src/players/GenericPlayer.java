@@ -47,6 +47,6 @@ public abstract class GenericPlayer implements Actor{
 
     @Override
     public boolean canHit() {
-        return hand.value().size() > 0 && balance > 0;
+        return hand.value().size() > 0 && balance >= 0;
     }
 }
