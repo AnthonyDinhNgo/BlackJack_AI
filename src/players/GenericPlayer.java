@@ -74,4 +74,6 @@ public abstract class GenericPlayer implements Actor{
     public double getWinRate() {
         return (0.0 + roundsWon) / roundsPlayed;
     }
+
+    public abstract String getFirstMove();
 }

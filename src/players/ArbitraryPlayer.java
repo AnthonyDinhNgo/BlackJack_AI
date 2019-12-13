@@ -15,4 +15,10 @@ public class ArbitraryPlayer extends GenericPlayer{
     public int getBet() {
         return (int) ((Math.random() * (super.getBalance()))) + 1;
     }
+
+    @Override
+    public String getFirstMove() {
+        //TODO: Implement first move controls
+        return null;
+    }
 }

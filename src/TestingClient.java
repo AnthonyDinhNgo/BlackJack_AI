@@ -1,6 +1,6 @@
 import players.ArbitraryPlayer;
 import players.GenericPlayer;
-//import players.HumanPlayer;
+import players.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class TestingClient {
         for (int i = 0; i < playerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
         }
-        //players.add(new HumanPlayer());
+        players.add(new HumanPlayer());
         playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
     }

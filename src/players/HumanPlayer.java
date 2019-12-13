@@ -38,4 +38,10 @@ public class HumanPlayer extends GenericPlayer {
         }
         return Integer.parseInt(input);
     }
+
+    @Override
+    public String getFirstMove() {
+        //TODO: Implement first move controls
+        return null;
+    }
 }
