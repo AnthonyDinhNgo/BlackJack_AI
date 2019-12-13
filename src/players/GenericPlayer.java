@@ -9,14 +9,14 @@ public abstract class GenericPlayer implements Actor{
     private int balance = 1000000; //$10,000.00 balance;;
     private int roundsWon = 0;
     private int roundsPlayed = 0;
-    private Hand hand;
+    private Hand hand = new Hand();
 
     public String getName(){
         return name;
     }
 
     public double getBalance(){
-        return balance/100 ;
+        return balance/100;
     }
 
     public void changeBalance(int delta) {

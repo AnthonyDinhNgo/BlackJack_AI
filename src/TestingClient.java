@@ -1,7 +1,26 @@
+import players.GenericPlayer;
+import players.HumanPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestingClient {
     public static void main(String[] args){
-        BlackJackGame game = new BlackJackGame(6);
-        int playCount = 10;
+        int deckCount = 100;
+        List<GenericPlayer> players = new ArrayList<>();
+        players.add(new HumanPlayer());
+        playUntilComplete(deckCount, players);
+        //playFinite(deckCount, 10);
+    }
+    private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
+        BlackJackGame game = new BlackJackGame(deckCount, players);
+        while (game.canPlay()) {
+            game.playRound();
+        }
+    }
+
+    private static void playFinite(int deckCount, int playCount, List<GenericPlayer> players){
+        BlackJackGame game = new BlackJackGame(deckCount, players);
         for (int i = 0; i < playCount; i++) {
             game.playRound();
         }

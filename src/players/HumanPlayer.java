@@ -12,6 +12,7 @@ public class HumanPlayer extends GenericPlayer {
             System.out.println("Keep your name under 10 characters");
             input = console.nextLine();
         }
+        name = input;
     }
 
     @Override
