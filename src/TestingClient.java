@@ -1,3 +1,4 @@
+import blackjack.BasicBlackJackGame;
 import players.ArbitraryPlayer;
 import players.GenericPlayer;
 import players.HumanPlayer;
@@ -18,7 +19,7 @@ public class TestingClient {
         //playFinite(deckCount, 10);
     }
     private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
-        BlackJackGame game = new BlackJackGame(deckCount, new ArrayList<>(players));
+        BasicBlackJackGame game = new BasicBlackJackGame(deckCount, new ArrayList<>(players));
         while (game.canPlay()) {
             game.playRound();
         }
@@ -34,7 +35,7 @@ public class TestingClient {
     }
 
     private static void playFinite(int deckCount, int playCount, List<GenericPlayer> players){
-        BlackJackGame game = new BlackJackGame(deckCount, players);
+        BasicBlackJackGame game = new BasicBlackJackGame(deckCount, players);
         for (int i = 0; i < playCount; i++) {
             game.playRound();
         }

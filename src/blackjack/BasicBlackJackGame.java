@@ -1,3 +1,5 @@
+package blackjack;
+
 import deck.Deck;
 import players.Dealer;
 import players.GenericPlayer;
@@ -9,12 +11,12 @@ import java.util.Map;
 import java.util.HashMap;
 
 
-public class BlackJackGame {
+public class BasicBlackJackGame {
     private Deck deck;
     private Dealer dealer;
     private List<GenericPlayer> playerRoster;
 
-    public BlackJackGame(int deckCount, List<GenericPlayer> playerRoster){
+    public BasicBlackJackGame(int deckCount, List<GenericPlayer> playerRoster){
         if (playerRoster == null) {
             throw new IllegalArgumentException("playerRoster cannot be null");
         }
