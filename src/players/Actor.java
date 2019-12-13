@@ -12,4 +12,6 @@ public interface Actor {
     public Hand getHand();
 
     public void clearHand();
+
+    public boolean canHit();
 }

@@ -4,7 +4,6 @@ import deck.Card;
 import deck.Hand;
 
 import java.util.Collections;
-import java.util.Set;
 
 
 public class Dealer implements Actor {
@@ -15,11 +14,7 @@ public class Dealer implements Actor {
     }
 
     public boolean getAction() {
-        Set<Integer> values = hand.value();
-        if (values.size() > 0) {
-            return Collections.max(hand.value()) < 17;
-        }
-        return false;
+        return Collections.max(hand.value()) < 17;
     }
 
     public void giveCard(Card c) {
@@ -32,5 +27,10 @@ public class Dealer implements Actor {
 
     public void clearHand() {
         hand.clear();
+    }
+
+    @Override
+    public boolean canHit() {
+        return hand.value().size() > 0;
     }
 }

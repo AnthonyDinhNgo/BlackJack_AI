@@ -23,7 +23,7 @@ public class BlackJackGame {
     }
 
     public void playRound(){
-        System.out.println("\n");
+        System.out.println("\nDistributing Cards");
         //Distributing player cards
         for (GenericPlayer p : playerRoster) {
             p.giveCard(deck.getCard());
@@ -39,27 +39,36 @@ public class BlackJackGame {
         System.out.println("Dealer has [] and " +
                 dealer.getHand().getCards().get(1));
 
-        // PlayerActions
+        // Player Actions
+        for (GenericPlayer p : playerRoster) {
+            while (p.canHit() && p.getAction()){
+                p.giveCard(deck.getCard());
+            }
+        }
 
         //Dealer Action
-        while (dealer.getAction()){
+        while (dealer.canHit() && dealer.getAction()){
             dealer.giveCard(deck.getCard());
         }
-        //Dealer Conclusion
-        System.out.println("Dealer has " + dealer.getHand().toString());
-        if (dealer.getHand().value().isEmpty()){
-            System.out.println("Dealer has busted");
-        } else {
-            System.out.println("Dealer has a " + Collections.max(dealer.getHand().value()));
-        }
+        System.out.println("Conclusions");
+        // Player Conclusions
         for (GenericPlayer p: playerRoster) {
             System.out.println(p.getName() + " has " + p.getHand().toString());
             if (p.getHand().value().isEmpty()){
                 System.out.println(p.getName() + " has busted");
             } else {
-                System.out.println(p.getName() + " has a " + Collections.max(p.getHand().value()));
+                System.out.println(p.getName() + " has " + Collections.max(p.getHand().value()));
             }
         }
+
+        //Dealer Conclusion
+        System.out.println("Dealer has " + dealer.getHand().toString());
+        if (dealer.getHand().value().isEmpty()){
+            System.out.println("Dealer has busted");
+        } else {
+            System.out.println("Dealer has " + Collections.max(dealer.getHand().value()));
+        }
+
         //Clearing all hands
         for (GenericPlayer p: playerRoster) {
             p.clearHand();

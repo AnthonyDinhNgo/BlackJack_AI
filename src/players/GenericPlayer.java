@@ -42,4 +42,9 @@ public abstract class GenericPlayer implements Actor{
     public void clearHand(){
         hand.clear();
     }
+
+    @Override
+    public boolean canHit() {
+        return hand.value().size() > 0;
+    }
 }
