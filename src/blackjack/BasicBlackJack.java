@@ -1,7 +1,6 @@
 package blackjack;
 
 import deck.Deck;
-import deck.Hand;
 import players.Dealer;
 import players.GenericPlayer;
 
@@ -16,7 +15,6 @@ public class BasicBlackJack implements BlackJack{
     private Deck deck;
     private Dealer dealer;
     private List<GenericPlayer> playerRoster;
-    private Map<GenericPlayer, List<Hand>> hands;
     private Map<GenericPlayer, Integer> betMap;
 
     public BasicBlackJack(int deckCount, List<GenericPlayer> playerRoster){
@@ -30,7 +28,6 @@ public class BasicBlackJack implements BlackJack{
         this.playerRoster = playerRoster;
         dealer = new Dealer();
         betMap = new HashMap<>();
-        hands = new HashMap<>();
     }
 
     public void playRound(){
