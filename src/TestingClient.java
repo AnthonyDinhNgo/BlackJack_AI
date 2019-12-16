@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 1;
-        int playerCount = 160;
+        int deckCount = 100;
+        int playerCount = 16;
         List<GenericPlayer> players = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));

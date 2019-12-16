@@ -58,6 +58,7 @@ public class CasinoBlackJack implements BlackJack{
         //Clearing all hands
         for (GenericPlayer p: playerRoster) {
             p.clearHand();
+            hands = new HashMap<>();
         }
         dealer.clearHand();
         System.out.println();
