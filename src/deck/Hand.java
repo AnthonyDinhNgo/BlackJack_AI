@@ -63,12 +63,29 @@ public class Hand {
     public String toString() {
         String retString = hand.get(0).toString();
         for (int i = 1; i< hand.size(); i++){
-            retString += ", " + hand.get(i).toString();
+            retString = retString + (", " + hand.get(i).toString());
         }
         return retString;
     }
 
+    public Hand split(Card c1, Card c2) {
+        Hand newHand = new Hand();
+        newHand.addCard(hand.get(0));
+        newHand.addCard(c1);
+        hand.remove(0);
+        addCard(c2);
+        return newHand;
+    }
+
+    public boolean canSplit() {
+        return hand.size() == 2 && hand.get(0).value().equals(hand.get(1).value());
+    }
+
     public int size(){
         return hand.size();
+    }
+
+    public boolean canHit() {
+        return value().size() > 0;
     }
 }

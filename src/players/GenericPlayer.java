@@ -4,6 +4,7 @@ import deck.Card;
 import deck.Hand;
 
 
+
 public abstract class GenericPlayer implements Actor{
     String name;
     private int balance = 10000; //$10,000 balance;;
@@ -76,4 +77,8 @@ public abstract class GenericPlayer implements Actor{
     }
 
     public abstract String getFirstMove();
+
+    public abstract boolean getSplit(Hand h);
+
+    public abstract boolean getAction(Hand h);
 }

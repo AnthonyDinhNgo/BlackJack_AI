@@ -11,12 +11,13 @@ import java.util.Map;
 import java.util.HashMap;
 
 
-public class BasicBlackJackGame {
+public class BasicBlackJack {
     private Deck deck;
     private Dealer dealer;
     private List<GenericPlayer> playerRoster;
+    private Map<GenericPlayer, Integer> betMap;
 
-    public BasicBlackJackGame(int deckCount, List<GenericPlayer> playerRoster){
+    public BasicBlackJack(int deckCount, List<GenericPlayer> playerRoster){
         if (playerRoster == null) {
             throw new IllegalArgumentException("playerRoster cannot be null");
         }
@@ -26,18 +27,19 @@ public class BasicBlackJackGame {
         deck = new Deck(deckCount);
         this.playerRoster = playerRoster;
         dealer = new Dealer();
+        betMap = new HashMap<>();
     }
 
     public void playRound(){
         //Obtaining player bets
         System.out.println("Obtaining Player Bets...");
-        Map<GenericPlayer, Integer> betMap = obtainBets();
+        obtainBets();
 
         System.out.println("Distributing Cards...");
         distribute();
 
         System.out.println("Conclusions...");
-        List<GenericPlayer> eliminationList = conclude(betMap);
+        List<GenericPlayer> eliminationList = conclude();
 
         System.out.println("Eliminating Players...");
         eliminate(eliminationList);
@@ -57,8 +59,7 @@ public class BasicBlackJackGame {
         System.out.println();
     }
 
-    private Map<GenericPlayer, Integer> obtainBets() {
-        Map<GenericPlayer, Integer> betMap = new HashMap<>();
+    private void obtainBets() {
         for (GenericPlayer p : playerRoster) {
             int bet = p.getBet();
             p.changeBalance(0-bet);
@@ -66,7 +67,6 @@ public class BasicBlackJackGame {
             p.incrementRoundsPlayed();
             System.out.println(p.getName() + " has bet $" + bet);
         }
-        return betMap;
     }
 
     private void distribute() {
@@ -100,7 +100,7 @@ public class BasicBlackJackGame {
         }
     }
 
-    private List<GenericPlayer> conclude(Map<GenericPlayer, Integer> betMap) {
+    private List<GenericPlayer> conclude() {
         // dealer conclusion
         int dealerValue;
         System.out.println("Dealer has " + dealer.getHand().toString());
