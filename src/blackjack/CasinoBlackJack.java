@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class CasinoBlackJack {
+public class CasinoBlackJack implements BlackJack{
     private Deck deck;
     private Dealer dealer;
     private List<GenericPlayer> playerRoster;

@@ -1,4 +1,5 @@
 import blackjack.BasicBlackJack;
+import blackjack.BlackJack;
 import blackjack.CasinoBlackJack;
 import players.ArbitraryPlayer;
 import players.GenericPlayer;
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 100;
-        int playerCount = 16;
+        int deckCount = 1;
+        int playerCount = 160;
         List<GenericPlayer> players = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
@@ -20,7 +21,7 @@ public class TestingClient {
         //playFinite(deckCount, 10);
     }
     private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
-        CasinoBlackJack game = new CasinoBlackJack(deckCount, new ArrayList<>(players));
+        BlackJack game = new CasinoBlackJack(deckCount, new ArrayList<>(players));
         while (game.canPlay()) {
             game.playRound();
         }

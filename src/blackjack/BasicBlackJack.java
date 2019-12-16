@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 
-public class BasicBlackJack {
+public class BasicBlackJack implements BlackJack{
     private Deck deck;
     private Dealer dealer;
     private List<GenericPlayer> playerRoster;
