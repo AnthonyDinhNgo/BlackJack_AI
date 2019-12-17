@@ -11,12 +11,12 @@ import java.util.List;
 public class TestingClient {
     public static void main(String[] args){
         int deckCount = 100;
-        int playerCount = 16;
+        int playerCount = 1;
         List<GenericPlayer> players = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
         }
-//        players.add(new HumanPlayer());
+        players.add(new HumanPlayer());
         playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
     }

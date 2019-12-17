@@ -1,21 +1,14 @@
 package blackjack;
 
 import deck.Deck;
-import players.Dealer;
 import players.GenericPlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 
-public class BasicBlackJack implements BlackJack{
-    private Deck deck;
-    private Dealer dealer;
-    private List<GenericPlayer> playerRoster;
-    private Map<GenericPlayer, Integer> betMap;
+public class BasicBlackJack extends GenericBlackJack{
 
     public BasicBlackJack(int deckCount, List<GenericPlayer> playerRoster){
         if (playerRoster == null) {
@@ -26,14 +19,12 @@ public class BasicBlackJack implements BlackJack{
         }
         deck = new Deck(deckCount);
         this.playerRoster = playerRoster;
-        dealer = new Dealer();
-        betMap = new HashMap<>();
     }
 
     public void playRound(){
         //Obtaining player bets
         System.out.println("Obtaining Player Bets...");
-        obtainBets();
+        super.obtainBets();
 
         System.out.println("Distributing Cards...");
         distribute();
@@ -57,16 +48,6 @@ public class BasicBlackJack implements BlackJack{
         }
         dealer.clearHand();
         System.out.println();
-    }
-
-    private void obtainBets() {
-        for (GenericPlayer p : playerRoster) {
-            int bet = p.getBet();
-            p.changeBalance(0-bet);
-            betMap.put(p, bet);
-            p.incrementRoundsPlayed();
-            System.out.println(p.getName() + " has bet $" + bet);
-        }
     }
 
     private void distribute() {
@@ -148,18 +129,5 @@ public class BasicBlackJack implements BlackJack{
             }
         }
         return eliminationList;
-    }
-
-    private void eliminate(List<GenericPlayer> eliminationList) {
-        for (GenericPlayer p : eliminationList) {
-            playerRoster.remove(p);
-            System.out.println(p.getName() + " has no more money and has left the game");
-            int winPercent = (int) (p.getWinRate() * 100);
-            System.out.println(p.getName() + " won " + p.getRoundsWon() + " rounds (" + winPercent + "%)");
-        }
-    }
-
-    public boolean canPlay(){
-        return deck.size() > 2 * (playerRoster.size() + 1) && playerRoster.size() > 0;
     }
 }
