@@ -4,9 +4,9 @@ import deck.Hand;
 
 import java.util.Scanner;
 
-public class HumanPlayer extends GenericPlayer {
+public class Human extends GenericPlayer {
 
-    public HumanPlayer(){
+    public Human(){
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name?");
         String input = console.nextLine();

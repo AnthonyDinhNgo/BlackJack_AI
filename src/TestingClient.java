@@ -2,7 +2,7 @@ import blackjack.BasicBlackJack;
 import blackjack.BlackJack;
 import players.ArbitraryPlayer;
 import players.GenericPlayer;
-import players.HumanPlayer;
+import players.Human;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class TestingClient {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
         }
         if (hasHumanPlayer) {
-            players.add(new HumanPlayer());
+            players.add(new Human());
         }
         playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
