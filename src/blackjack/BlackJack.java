@@ -1,6 +1,7 @@
 package blackjack;
 
 public interface BlackJack {
-    public void playRound();
-    public boolean canPlay();
+    void playRound();
+    boolean canPlay();
+    void getMetrics();
 }

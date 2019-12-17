@@ -124,6 +124,38 @@ public abstract class GenericBlackJack implements BlackJack {
     }
 
     public boolean canPlay(){
-        return deck.size() > 2 * (playerRoster.size() + 1) && playerRoster.size() > 0;
+        return deck.size() > Math.pow(playerRoster.size() + 5, 2) && playerRoster.size() > 0;
+    }
+
+    public void getMetrics() {
+        System.out.println("Obtaining Player Bets...");
+        for (GenericPlayer p : playerRoster) {
+            betMap.put(p, 0);
+            System.out.println(p.getName() + " has bet $0");
+        }
+
+        System.out.println("Distributing Cards...");
+        distribute();
+
+        System.out.println("Conclusions...");
+        List<GenericPlayer> eliminationList = conclude();
+
+        System.out.println("Eliminating Players...");
+        eliminate(eliminationList);
+
+        if (deck.size() <= 2 * (playerRoster.size() + 1)) {
+            System.out.println("Not enough cards in deck; Game is over");
+        }
+        if (playerRoster.size() <= 0) {
+            System.out.println("No more players; Game is over");
+        }
+
+        //Clearing all hands
+        for (GenericPlayer p: playerRoster) {
+            p.clearHand();
+        }
+        hands = new HashMap<>();
+        dealer.clearHand();
+        System.out.println();
     }
 }
