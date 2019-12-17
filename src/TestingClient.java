@@ -10,13 +10,16 @@ import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 100;
-        int playerCount = 1;
+        int deckCount = 10000;
+        int playerCount = 0;
+        boolean hasHumanPlayer = true;
         List<GenericPlayer> players = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
         }
-        players.add(new HumanPlayer());
+        if (hasHumanPlayer) {
+            players.add(new HumanPlayer());
+        }
         playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
     }

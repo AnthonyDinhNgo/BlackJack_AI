@@ -1,14 +1,15 @@
 package blackjack;
 
 import deck.Deck;
+import deck.Hand;
 import players.GenericPlayer;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class BasicBlackJack extends GenericBlackJack{
+
 
     public BasicBlackJack(int deckCount, List<GenericPlayer> playerRoster){
         if (playerRoster == null) {
@@ -21,36 +22,7 @@ public class BasicBlackJack extends GenericBlackJack{
         this.playerRoster = playerRoster;
     }
 
-    public void playRound(){
-        //Obtaining player bets
-        System.out.println("Obtaining Player Bets...");
-        super.obtainBets();
-
-        System.out.println("Distributing Cards...");
-        distribute();
-
-        System.out.println("Conclusions...");
-        List<GenericPlayer> eliminationList = conclude();
-
-        System.out.println("Eliminating Players...");
-        eliminate(eliminationList);
-
-        if (deck.size() <= 2 * (playerRoster.size() + 1)) {
-            System.out.println("Not enough cards in deck; Game is over");
-        }
-        if (playerRoster.size() <= 0) {
-            System.out.println("No more players; Game is over");
-        }
-
-        //Clearing all hands
-        for (GenericPlayer p: playerRoster) {
-            p.clearHand();
-        }
-        dealer.clearHand();
-        System.out.println();
-    }
-
-    private void distribute() {
+    void distribute() {
         //Distributing player cards
         for (GenericPlayer p : playerRoster) {
             p.giveCard(deck.getCard());
@@ -68,11 +40,14 @@ public class BasicBlackJack extends GenericBlackJack{
 
         // Player Actions
         for (GenericPlayer p : playerRoster) {
-            while (p.canHit() && p.getAction()){
-                p.giveCard(deck.getCard());
-                System.out.println(p.getName() + " has " + p.getHand().toString());
-                System.out.println(p.getName() + " has possible totals of " + p.getHand().value());
+            List<Hand> handsList = new LinkedList<>();
+            handsList.add(p.getHand());
+            for (Hand hand : handsList) {
+                while (hand.canHit() && p.getAction(hand)) {
+                    hand.addCard(deck.getCard());
+                }
             }
+            hands.put(p, handsList);
         }
 
         //Dealer Action
@@ -81,53 +56,4 @@ public class BasicBlackJack extends GenericBlackJack{
         }
     }
 
-    private List<GenericPlayer> conclude() {
-        // dealer conclusion
-        int dealerValue;
-        System.out.println("Dealer has " + dealer.getHand().toString());
-        if (dealer.getHand().value().isEmpty()){
-            System.out.println("Dealer has busted");
-            dealerValue = -1;
-        } else {
-            dealerValue = Collections.max(dealer.getHand().value());
-            System.out.println("Dealer has " + dealerValue);
-        }
-        // Player conclusions and distributing winnings
-        List<GenericPlayer> eliminationList = new ArrayList<>();
-        if (dealerValue < 0) {
-            System.out.println("Dealer busted. Everyone Wins");
-            for (GenericPlayer p : playerRoster) {
-                p.changeBalance(2 * betMap.get(p));
-                p.incrementRoundsWon();
-                System.out.println(p.getName() + " has $" + p.getBalance() + " left");
-            }
-        } else {
-            for (GenericPlayer p : playerRoster) {
-                String pName = p.getName();
-                System.out.println(p.getName() + " has " + p.getHand().toString());
-                if (p.getHand().value().isEmpty()) {
-                    System.out.println(pName + " has busted");
-                    System.out.println(pName + " lost $" + betMap.get(p));
-                } else {
-                    int playerValue = Collections.max(p.getHand().value());
-                    System.out.println(pName + " has " + playerValue);
-                    if (playerValue > dealerValue) {
-                        p.changeBalance(2 * betMap.get(p));
-                        p.incrementRoundsWon();
-                        System.out.println(pName + " won $" + betMap.get(p));
-                    } else if (playerValue == dealerValue) {
-                        p.changeBalance(betMap.get(p));
-                        System.out.println(pName + " tied with the dealer. Bet has been returned");
-                    } else {
-                        System.out.println(p.getName() + " lost $" + betMap.get(p));
-                    }
-                }
-                System.out.println(p.getName() + " has $" + p.getBalance() + " left");
-                if (p.getBalance() <= 0) {
-                    eliminationList.add(p);
-                }
-            }
-        }
-        return eliminationList;
-    }
 }
