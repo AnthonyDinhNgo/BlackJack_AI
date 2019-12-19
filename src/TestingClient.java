@@ -1,33 +1,42 @@
 import blackjack.BasicBlackJack;
 import blackjack.BlackJack;
+import blackjack.CasinoBlackJack;
 import players.ArbitraryPlayer;
 import players.GenericPlayer;
 import players.Human;
+import players.StrategicPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 1000;
-        int playerCount = 1;
+        int deckCount = 6;
+        int arbitraryPlayerCount = 0;
+        int strategicPlayerCount = 1;
         boolean hasHumanPlayer = false;
         List<GenericPlayer> players = new ArrayList<>();
-        for (int i = 0; i < playerCount; i++) {
+        for (int i = 0; i < arbitraryPlayerCount; i++) {
             players.add(new ArbitraryPlayer("aPlayer_" + i));
+        }
+        for (int i = 0; i < strategicPlayerCount; i++) {
+            players.add(new StrategicPlayer("sPlayer_" + i));
         }
         if (hasHumanPlayer) {
             players.add(new Human());
         }
-        playUntilComplete(deckCount, players);
+        //playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
+        profitRate(deckCount, players, 1000);
+
     }
     private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
-        BlackJack game = new BasicBlackJack(deckCount, new ArrayList<>(players));
+        BlackJack game = new CasinoBlackJack(deckCount, new ArrayList<>(players));
         while (game.canPlay()) {
-            game.getMetrics();
+            game.playRound();
         }
         System.out.println();
+        int overallProfit = 0;
         for (GenericPlayer p : players) {
             int winPercent = (int) (p.getWinRate() * 100);
             System.out.println(
@@ -35,7 +44,45 @@ public class TestingClient {
                             + " rounds out of "
                             + p.getRoundsPlayed()
                             + " (" + winPercent + "%)");
+            System.out.println(p.getName() + " has $" + p.getBalance() + " left");
+            overallProfit += p.getBalance();
+            overallProfit -= 10000;
         }
+        System.out.println("Overall profit: $" + overallProfit);
+    }
+
+    private static void profitRate(int deckCount, List<GenericPlayer> players, int playCount) {
+        int profitCount = 0;
+        for (int i = 0; i < playCount; i++) {
+            BlackJack game = new CasinoBlackJack(deckCount, new ArrayList<>(players));
+            while (game.canPlay()) {
+                game.playRound();
+            }
+            System.out.println();
+            int overallProfit = 0;
+            for (GenericPlayer p : players) {
+                int winPercent = (int) (p.getWinRate() * 100);
+                System.out.println(
+                        p.getName() + " won " + p.getRoundsWon()
+                                + " rounds out of "
+                                + p.getRoundsPlayed()
+                                + " (" + winPercent + "%)");
+                System.out.println(p.getName() + " has $" + p.getBalance() + " left");
+                overallProfit += p.getBalance();
+                overallProfit -= 10000;
+            }
+            for (GenericPlayer p : players) {
+                p.changeBalance(0 - p.getBalance());
+                p.changeBalance(10000);
+                p.clearHand();
+            }
+            System.out.println("Overall profit: $" + overallProfit);
+            if (overallProfit > 0) {
+                profitCount++;
+            }
+        }
+        System.out.println("Player profited " + profitCount + " times (" + ((int) (profitCount * 100 / playCount)) +
+                "%)");
     }
 
     private static void playFinite(int deckCount, int playCount, List<GenericPlayer> players){
@@ -51,6 +98,7 @@ public class TestingClient {
                             + " rounds out of "
                             + p.getRoundsPlayed()
                             + " (" + winPercent + "%)");
+            System.out.println(p.getName() + " has $" + p.getBalance() + " left");
         }
     }
 }

@@ -5,7 +5,6 @@ import deck.Hand;
 
 
 public interface Actor {
-    public boolean getAction();
 
     public void giveCard(Card c);
 

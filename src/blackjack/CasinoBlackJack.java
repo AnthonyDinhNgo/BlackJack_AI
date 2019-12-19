@@ -39,7 +39,7 @@ public class CasinoBlackJack extends GenericBlackJack{
 
         // Player Actions
         for (GenericPlayer p : playerRoster) {
-            String firstMove = p.getFirstMove();
+            String firstMove = p.getFirstMove(dealer.getHand().getCards().get(0));
             List<Hand> handsList = new LinkedList<>();
             handsList.add(p.getHand());
             if (firstMove.equalsIgnoreCase("surrender")) {
@@ -57,7 +57,7 @@ public class CasinoBlackJack extends GenericBlackJack{
             } else {
                 for (int i = 0; i < handsList.size(); i++) {
                     Hand hand = handsList.get(i);
-                    if (hand.canSplit() && p.getSplit(hand)) {
+                    if (hand.canSplit() && p.getSplit(hand, dealer.getHand().getCards().get(0))) {
                         handsList.remove(i);
                         handsList.add(hand.split(deck.getCard(), deck.getCard()));
                         handsList.add(hand);
@@ -66,7 +66,7 @@ public class CasinoBlackJack extends GenericBlackJack{
                     }
                 }
                 for (Hand hand : handsList) {
-                    while (hand.canHit() && p.getAction(hand)) {
+                    while (hand.canHit() && p.getAction(hand, dealer.getHand().getCards().get(0))) {
                         hand.addCard(deck.getCard());
                     }
                 }

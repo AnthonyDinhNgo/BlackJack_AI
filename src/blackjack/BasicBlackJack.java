@@ -43,7 +43,7 @@ public class BasicBlackJack extends GenericBlackJack{
             List<Hand> handsList = new LinkedList<>();
             handsList.add(p.getHand());
             for (Hand hand : handsList) {
-                while (hand.canHit() && p.getAction(hand)) {
+                while (hand.canHit() && p.getAction(hand, dealer.getHand().getCards().get(0))) {
                     hand.addCard(deck.getCard());
                 }
             }

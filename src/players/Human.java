@@ -1,5 +1,6 @@
 package players;
 
+import deck.Card;
 import deck.Hand;
 
 import java.util.Scanner;
@@ -18,18 +19,6 @@ public class Human extends GenericPlayer {
     }
 
     @Override
-    public boolean getAction() {
-        Scanner console = new Scanner(System.in);
-        System.out.println("Would you like to HIT or STAY?");
-        String input = console.nextLine();
-        while (!(input.equalsIgnoreCase("hit") || input.equalsIgnoreCase("stay"))) {
-            System.out.println("Error: Invalid Input; enter HIT or STAY");
-            input = console.nextLine();
-        }
-        return input.equalsIgnoreCase("hit");
-    }
-
-    @Override
     public int getBet() {
         Scanner console = new Scanner(System.in);
         System.out.println("How much would you like to bet?\nYou have $"+ getBalance());
@@ -42,7 +31,7 @@ public class Human extends GenericPlayer {
     }
 
     @Override
-    public String getFirstMove() {
+    public String getFirstMove(Card dealerCard) {
         Scanner console = new Scanner(System.in);
         System.out.println("Would you like to SURRENDER, DOUBLE, or NEITHER?");
         String input = console.nextLine();
@@ -55,7 +44,7 @@ public class Human extends GenericPlayer {
     }
 
     @Override
-    public boolean getSplit(Hand hand) {
+    public boolean getSplit(Hand hand,  Card dealerCard) {
         Scanner console = new Scanner(System.in);
         System.out.println("Would you like to split the hand " + hand.toString());
         String input = console.nextLine();
@@ -67,7 +56,7 @@ public class Human extends GenericPlayer {
     }
 
     @Override
-    public boolean getAction(Hand h) {
+    public boolean getAction(Hand h,  Card dealerCard) {
         System.out.println(name + " has " + h.toString());
         System.out.println(name + " has " + h.value());
         Scanner console = new Scanner(System.in);

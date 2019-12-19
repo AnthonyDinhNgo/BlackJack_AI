@@ -1,5 +1,6 @@
 package players;
 
+import deck.Card;
 import deck.Hand;
 
 public class ArbitraryPlayer extends GenericPlayer{
@@ -9,7 +10,7 @@ public class ArbitraryPlayer extends GenericPlayer{
     }
 
     @Override
-    public boolean getAction() {
+    public boolean getAction(Hand hand, Card dealerCard) {
         return Math.random() > 0.5;
     }
 
@@ -23,7 +24,7 @@ public class ArbitraryPlayer extends GenericPlayer{
     }
 
     @Override
-    public String getFirstMove() {
+    public String getFirstMove(Card dealerCard) {
         int determiningFactor = (int) (Math.random() * 3);
         if (determiningFactor == 0) {
             return "SURRENDER";
@@ -34,7 +35,7 @@ public class ArbitraryPlayer extends GenericPlayer{
     }
 
     @Override
-    public boolean getSplit(Hand hand) {
+    public boolean getSplit(Hand hand, Card dealerCard) {
         return Math.random() > 0.5;
     }
 }

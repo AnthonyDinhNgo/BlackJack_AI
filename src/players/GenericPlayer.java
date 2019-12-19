@@ -76,9 +76,9 @@ public abstract class GenericPlayer implements Actor{
         return (0.0 + roundsWon) / roundsPlayed;
     }
 
-    public abstract String getFirstMove();
+    public abstract String getFirstMove(Card dealerCard);
 
-    public abstract boolean getSplit(Hand h);
+    public abstract boolean getSplit(Hand h, Card dealerCard);
 
-    public abstract boolean getAction(Hand h);
+    public abstract boolean getAction(Hand h, Card dealerCard);
 }
