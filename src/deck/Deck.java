@@ -37,10 +37,12 @@ public class Deck {
         deck = cards;
     }
 
+    //Returns the how many cards are left in the deck
     public int size(){
         return deck.size();
     }
 
+    //Returns the first card removed from the deck and decrements the count of that card in the cardCounts
     public Card getCard(){
         Card retCard = deck.remove();
         int cardIndex = retCard.value().get(0);
@@ -61,10 +63,13 @@ public class Deck {
         return retCard;
     }
 
+    //Returns a 13-size array of integers where each index indicates the number of cards
+    //I.E. [0] indicates the number of aces, [1] the number of 2s, etc
     public int[] getCardCounts() {
         return cardCounts;
     }
 
+    //Returns the integer number of cards that were in the deck initially
     public int getOgCardCount() {
         return ogCardCount;
     }

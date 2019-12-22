@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 public class StrategicPlayer extends GenericPlayer {
+
+    //List of all the possible values of the cards in the deck to be used as references in conditional statements
     private final List<Card> cardOptions = new ArrayList<>();
     public StrategicPlayer(String name) {
         this.name = name;
@@ -28,11 +30,13 @@ public class StrategicPlayer extends GenericPlayer {
         cardOptions.add(new Card("King", 10));          //Index 12
     }
 
+    //Returns a default bet of 100
     @Override
     public int getBet(Deck deck) {
         return 100;
     }
 
+    //Returns a string "Double", "Surrender", or "Neither" depending on the values of the dealer and player hands
     @Override
     public String getFirstMove(Card dealerCard) {
         Hand hand = getHand();
@@ -56,6 +60,7 @@ public class StrategicPlayer extends GenericPlayer {
         return "Neither";
     }
 
+    //Helper method to simplify the getFirstMove() method
     private String getSoftDouble(int maxValue, Card dealerCard) {
         if (maxValue == 19 && dealerCard.equals(cardOptions.get(5))) {
             return "Double";
@@ -92,6 +97,7 @@ public class StrategicPlayer extends GenericPlayer {
         return dupCard.equals(cardOptions.get(1)) && cardOptions.subList(1, 7).contains(dealerCard);
     }
 
+    //Returns a true if the strategy indicates that the player should hit
     @Override
     public boolean getAction(Hand h, Card dealerCard) {
         int maxValue = Collections.max(h.value());

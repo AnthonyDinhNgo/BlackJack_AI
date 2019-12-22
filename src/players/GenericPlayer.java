@@ -8,7 +8,7 @@ import deck.Hand;
 
 public abstract class GenericPlayer implements Actor{
     String name;
-    private int balance = 10000; //$10,000 balance;;
+    private int balance = 10000; //$10,000 default starting balance;;
     private int roundsWon = 0;
     private int roundsPlayed = 0;
     private Hand hand = new Hand(); // Cards in player hand
