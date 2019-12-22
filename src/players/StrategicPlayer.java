@@ -88,10 +88,8 @@ public class StrategicPlayer extends GenericPlayer {
             return true;
         } else if (dupCard.equals(cardOptions.get(2)) && cardOptions.subList(1, 7).contains(dealerCard)) {
             return true;
-        } else if (dupCard.equals(cardOptions.get(1)) && cardOptions.subList(1, 7).contains(dealerCard)) {
-            return true;
         }
-        return false;
+        return dupCard.equals(cardOptions.get(1)) && cardOptions.subList(1, 7).contains(dealerCard);
     }
 
     @Override
@@ -101,9 +99,8 @@ public class StrategicPlayer extends GenericPlayer {
             if (maxValue == 18 &&
                     (cardOptions.subList(8, 13).contains(dealerCard) || dealerCard.equals(cardOptions.get(0)))) {
                 return true;
-            } else if (maxValue < 18 && maxValue > 12) {
-                return true;
             }
+            return maxValue < 18 && maxValue > 12;
         } else if (maxValue < 17) {
             List<Card> subCardOneToSix = cardOptions.subList(1, 6);
             if (maxValue > 12 && !subCardOneToSix.contains(dealerCard)) {

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 4;
+        int deckCount = 8;
         int arbitraryPlayerCount = 0;
         int strategicPlayerCount = 0;
         int counterCount = 1;
@@ -88,9 +88,9 @@ public class TestingClient {
                 profitCount++;
             }
         }
-        System.out.println("Player profited " + profitCount + " times (" + ((int) (profitCount * 100 / playCount)) +
+        System.out.println("Player profited " + profitCount + " times (" + (profitCount * 100 / playCount) +
                 "%)");
-        System.out.println("Player profited $" + profit + " (" + ((int) profit * 100 / 10000) + "%)");
+        System.out.println("Player profited $" + profit + " (" + (profit * 100 / 10000) + "%)");
         System.out.println("Player averaged $" + profit / playCount + " per game");
     }
 
