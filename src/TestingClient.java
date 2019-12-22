@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TestingClient {
     public static void main(String[] args){
-        int deckCount = 8;
+        int deckCount = 4;
         int arbitraryPlayerCount = 0;
         int strategicPlayerCount = 0;
         int counterCount = 1;
@@ -32,7 +32,7 @@ public class TestingClient {
         }
         //playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
-        profitRate(deckCount, players, 10000);
+        profitRate(deckCount, players, 1000);
 
     }
     private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
