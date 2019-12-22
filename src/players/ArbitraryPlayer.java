@@ -1,6 +1,7 @@
 package players;
 
 import deck.Card;
+import deck.Deck;
 import deck.Hand;
 
 public class ArbitraryPlayer extends GenericPlayer{
@@ -14,12 +15,8 @@ public class ArbitraryPlayer extends GenericPlayer{
         return Math.random() > 0.5;
     }
 
-    public boolean getAction(Hand hand) {
-        return Math.random() > 0.5;
-    }
-
     @Override
-    public int getBet() {
+    public int getBet(Deck deck) {
         return (int) ((Math.random() * (super.getBalance()))) + 1;
     }
 

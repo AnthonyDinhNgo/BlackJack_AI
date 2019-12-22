@@ -9,10 +9,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class StrategicPlayer extends GenericPlayer {
+public class CardCounter extends GenericPlayer{
+
     private final List<Card> cardOptions = new ArrayList<>();
-    public StrategicPlayer(String name) {
+    private int bettingUnit;
+
+    public CardCounter(String name, int bettingUnit) {
         this.name = name;
+        this.bettingUnit = bettingUnit;
+
         cardOptions.add(new Card("Ace", 1, 11));  //Index 0
         cardOptions.add(new Card("2", 2));              //Index 1
         cardOptions.add(new Card("3", 3));              //Index 2
@@ -30,7 +35,21 @@ public class StrategicPlayer extends GenericPlayer {
 
     @Override
     public int getBet(Deck deck) {
-        return 100;
+        int minimumBet = 0;
+        int[] cardCounts = deck.getCardCounts();
+        int runningCount = 0 - cardCounts[0];
+        for (int i = 1; i < 6; i++) {
+            runningCount += (deck.getOgCardCount() - cardCounts[i]);
+        }
+        for (int i = 9; i < cardCounts.length; i++) {
+            runningCount -= (deck.getOgCardCount() - cardCounts[i]);
+        }
+
+        int trueCount = runningCount * 52 /deck.size();
+        if (trueCount < 0) {
+            return minimumBet;
+        }
+        return trueCount * bettingUnit;
     }
 
     @Override
@@ -116,5 +135,4 @@ public class StrategicPlayer extends GenericPlayer {
         }
         return false;
     }
-
 }

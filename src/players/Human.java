@@ -1,6 +1,7 @@
 package players;
 
 import deck.Card;
+import deck.Deck;
 import deck.Hand;
 
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class Human extends GenericPlayer {
     }
 
     @Override
-    public int getBet() {
+    public int getBet(Deck deck) {
         Scanner console = new Scanner(System.in);
         System.out.println("How much would you like to bet?\nYou have $"+ getBalance());
         String input = console.nextLine();

@@ -49,9 +49,9 @@ public abstract class GenericBlackJack implements BlackJack {
         System.out.println();
     }
 
-    void obtainBets() {
+    private void obtainBets() {
         for (GenericPlayer p : playerRoster) {
-            int bet = p.getBet();
+            int bet = p.getBet(deck);
             p.changeBalance(0-bet);
             betMap.put(p, bet);
             System.out.println(p.getName() + " has bet $" + bet);
@@ -60,7 +60,7 @@ public abstract class GenericBlackJack implements BlackJack {
 
     abstract void distribute();
 
-    List<GenericPlayer> conclude() {
+    private List<GenericPlayer> conclude() {
         // dealer conclusion
         int dealerValue;
         System.out.println("Dealer has " + dealer.getHand().toString());
@@ -114,7 +114,7 @@ public abstract class GenericBlackJack implements BlackJack {
         return eliminationList;
     }
 
-    void eliminate(List<GenericPlayer> eliminationList) {
+    private void eliminate(List<GenericPlayer> eliminationList) {
         for (GenericPlayer p : eliminationList) {
             playerRoster.remove(p);
             System.out.println(p.getName() + " has no more money and has left the game");

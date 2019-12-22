@@ -1,6 +1,7 @@
 package players;
 
 import deck.Card;
+import deck.Deck;
 import deck.Hand;
 
 
@@ -19,7 +20,7 @@ public abstract class GenericPlayer implements Actor{
     }
 
     //Returns the amount player wants to bet
-    public abstract int getBet();
+    public abstract int getBet(Deck deck);
 
     //Returns the amount of money player has left in their balance
     public int getBalance(){
