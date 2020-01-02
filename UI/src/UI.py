@@ -11,8 +11,9 @@ class Window(Frame):
         self.init_window()
 
     def init_window(self):
-        # changing the title of our master widget
         self.master.title("THORP")
+        root.iconbitmap('supplementaryFiles/spade_shk_icon.ico')
+        root.geometry("1600x800")
 
         # allowing the widget to take the full space of the root window
         self.pack(fill=BOTH, expand=1)
@@ -21,20 +22,17 @@ class Window(Frame):
         style.configure('TButton', font=('Verdana', 20),
                         borderwidth='6')
 
-        # creating a button instance
-        quit_button = Button(self, text="QUIT")
-
-        # placing the button on my window
-        quit_button.place(x=0, y=0)
-
-        canvas = Canvas(root, width=300, height=300)
-        canvas.pack()
-        img = ImageTk.PhotoImage(Image.open("supplementaryFiles/imThorp.png"))
-        canvas.create_image(20, 20, anchor=NW, image=img)
-
 
 root = Tk()
-root.geometry("1600x800")
 app = Window(root)
-root.iconbitmap('supplementaryFiles/spade_shk_icon.ico')
+im = Image.open("supplementaryFiles/imThorp.png")
+
+img = ImageTk.PhotoImage(im.resize((int(im.size[0] * 0.75), int(im.size[1] * 0.75))))
+imThorp = Label(root, image=img)
+imThorp.pack(side="bottom", fill="both", expand="yes")
+imThorp.place(relx=0.5, rely=0.5, anchor=CENTER)
+# creating a button instance
+quit_button = Button(root, text="QUIT")
+# placing the button on my window
+quit_button.place(relx=0.5, rely=0.8, anchor=CENTER)
 root.mainloop()
