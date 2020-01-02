@@ -22,16 +22,19 @@ public class Card {
         valList.add(val);
     }
 
+    //Returns the String name of the card
     @Override
     public String toString() {
         return card;
     }
 
+    //Returns the hashCode of the card
     public int hashCode() {
         String hashString = card + valList.toString();
         return hashString.hashCode();
     }
 
+    //Returns true if the card names are the same
     public boolean equals(Object other) {
         if (other instanceof Card) {
             Card o = (Card) other;
@@ -40,6 +43,7 @@ public class Card {
         return false;
     }
 
+    //Returns the values of the card
     public List<Integer> value() {
         return valList;
     }

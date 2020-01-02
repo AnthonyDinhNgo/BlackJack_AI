@@ -32,7 +32,7 @@ public class TestingClient {
         }
         //playUntilComplete(deckCount, players);
         //playFinite(deckCount, 10);
-        profitRate(deckCount, players, 1);
+        profitRate(deckCount, players, 10);
 
     }
     private static void playUntilComplete(int deckCount, List<GenericPlayer> players){
