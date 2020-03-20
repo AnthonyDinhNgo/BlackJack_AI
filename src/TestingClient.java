@@ -14,8 +14,8 @@ public class TestingClient {
     public static void main(String[] args){
         int deckCount = 8;
         int arbitraryPlayerCount = 0;
-        int strategicPlayerCount = 0;
-        int counterCount = 1;
+        int strategicPlayerCount = 1;
+        int counterCount = 0;
         boolean hasHumanPlayer = false;
         List<GenericPlayer> players = new ArrayList<>();
         for (int i = 0; i < arbitraryPlayerCount; i++) {
